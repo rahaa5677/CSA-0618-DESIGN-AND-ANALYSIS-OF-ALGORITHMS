@@ -1,0 +1,26 @@
+def optimized_bubble_sort(arr):
+    res = list(arr)
+    n = len(res)
+    passes = 0
+    
+    for i in range(n):
+        swapped = False
+        passes += 1
+        for j in range(0, n - i - 1):
+            if res[j] > res[j + 1]:
+                res[j], res[j + 1] = res[j + 1], res[j]
+                swapped = True
+        # If no elements were swapped by the inner loop, exit early
+        if not swapped:
+            break
+            
+    return res, passes
+
+# Test Cases
+sorted_rolls, passes = optimized_bubble_sort([101,102,104,103,105,107,106,108]) 
+assert sorted_rolls == sorted([101,102,104,103,105,107,106,108]) 
+assert passes < 8                            	# fewer than full n passes   
+
+sorted_ok, passes_ok = optimized_bubble_sort([1,2,3,4,5])   # already sorted 
+assert passes_ok == 1                        	# exits after first pass 
+print('Bubble Sort Q1: All test cases passed!')
